@@ -1,9 +1,17 @@
 <template>
   <div>
-    <CommonNavigation />
+    <TheNavigation />
     <Nuxt />
   </div>
 </template>
+
+
+<script>
+import TheNavigation from "~/components/common/TheNavigation";
+export default {
+  components: { TheNavigation },
+};
+</script>
 
 <style>
 html {

@@ -1,10 +1,11 @@
 <template>
+  <!-- bam -->
   <div class="todos_list p-5">
     <h4>TODO LIST</h4>
     <div class="list_body">
-      <div class="list_item" v-for="item in this.data" :key="item.id">
-        <span>{{ item.id }}.</span>
-        <NuxtLink :to="'/todo/' + item.id">{{ item.title }}</NuxtLink>
+      <div class="list_item" v-for="todo in todos" :key="todo.id">
+        <span>{{ todo.id }}.</span>
+        <NuxtLink :to="`/todo/${todo.id}`">{{ todo.title }}</NuxtLink>
       </div>
     </div>
   </div>
@@ -12,7 +13,13 @@
 
 <script>
 export default {
-  props: ["data"],
+  name: "TodosList",
+  props: {
+    todos: {
+      type: Array,
+      default: () => [],
+    },
+  },
 };
 </script>
 

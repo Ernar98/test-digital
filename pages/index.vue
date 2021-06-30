@@ -1,33 +1,40 @@
 <template>
   <div class="container p-5">
-    <MainFilter :onFilter="setFilter" />
-    <MainTodos :data="todos" />
+    <TodosFilter @handler-filter="(e) => setFilter(e)" />
+    <TodosList :todos="todos" />
   </div>
 </template>
 
 <script>
+// importy componentov - readablety
+
+import TodosFilter from "~/components/todos/TodosFilter";
+import TodosList from "~/components/todos/TodosList";
+
 export default {
+  name: "MainPage",
+  components: { TodosList, TodosFilter },
+
   data() {
     return {
       todos: [],
     };
   },
 
-  created: function () {
-    this.getTodos();
+  async fetch() {
+    this.todos = await this.$axios.$get(
+      "https://jsonplaceholder.typicode.com/todos?_limit=20"
+    );
   },
 
   methods: {
     async setFilter(id) {
-      let request = await this.$axios.$get(
-        "https://jsonplaceholder.typicode.com/todos?userId=" + id
-      );
-      this.todos = request;
-    },
+      // try catch для обработки ошибок
 
-    async getTodos() {
-      let request = await this.$axios.$get(
-        "https://jsonplaceholder.typicode.com/todos?_limit=20"
+      // console.error(e) - своя ошибка мб
+
+      const request = await this.$axios.$get(
+        "https://jsonplaceholder.typicode.com/todos?userId=" + id
       );
       this.todos = request;
     },

@@ -1,6 +1,7 @@
 <template>
+  <!-- BAM -->
   <div class="todo__container p-9">
-    <div v-if="loading">
+    <div v-if="$fetchState.pending">
       <h1 class="text-white">Wait..</h1>
     </div>
     <div v-else>
@@ -9,7 +10,9 @@
         <span class="text-white"
           >The task belongs to user with ID : {{ todoInfo.userId }}</span
         >
-        <span class="text-white">Finished status: {{ todoInfo.completed }}</span>
+        <span class="text-white"
+          >Finished status: {{ todoInfo.completed }}</span
+        >
       </div>
     </div>
   </div>
@@ -17,23 +20,17 @@
 
 <script>
 export default {
+  name: "TodoDetails",
   data() {
     return {
-      loading: true,
       todoInfo: [],
     };
   },
-  created() {
-    this.getTodoinfo();
-  },
-  methods: {
-    async getTodoinfo() {
-      let request = await this.$axios.$get(
-        "https://jsonplaceholder.typicode.com/todos?id=" + this.$route.params.id
-      );
-      this.todoInfo = request[0];
-      this.loading = false;
-    },
+  async fetch() {
+    const [todo] = await this.$axios.$get(
+      "https://jsonplaceholder.typicode.com/todos?id=" + this.$route.params.id
+    );
+    this.todoInfo = todo;
   },
 };
 </script>

@@ -1,29 +1,36 @@
 <template>
   <div class="filter p-5">
+    <!-- todos-filter -->
     <h3 class="text-white">SORT BY USER :</h3>
+    <!-- todos-filter__title -->
     <div class="user-list">
-      <div class="user" v-for="user in users" :key="user">
+      <!-- todos-filter__user-list -->
+      <label class="user" v-for="user in 9" :key="user">
+        <!-- todos-filter__user-item -->
         <span class="text-white">ID:{{ user }}</span>
-        <input type="radio" :value="user" v-model="picked" />
-      </div>
+        <input
+          type="radio"
+          :value="user"
+          name="user-filter"
+          @change="$emit('handler-filter', user)"
+          :checked="user === 1"
+        />
+      </label>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ["onFilter"],
-  data() {
-    return {
-      picked: 1,
-      users: [1, 2, 3, 4, 5, 6, 7, 8, 9],
-    };
-  },
-  watch: {
-    picked: function () {
-      this.onFilter(this.picked);
-    },
-  },
+  name: "TodosFilter",
+  // props: ["onFilter"],
+  //в пропсах нельзя прокидывать функции
+  //emits
+  // data() {
+  //   return {
+  //     picked: 1,
+  //   };
+  // },
 };
 </script>
 
