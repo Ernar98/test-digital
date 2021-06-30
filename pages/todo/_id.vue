@@ -33,7 +33,6 @@ export default {
       );
       this.todoInfo = request[0];
       this.loading = false;
-      console.log(this.todoInfo);
     },
   },
 };

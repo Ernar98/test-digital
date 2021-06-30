@@ -31,9 +31,6 @@ export default {
       );
       this.todos = request;
     },
-    showAlert() {
-      alert("AWFAWF");
-    },
   },
 };
 </script>
