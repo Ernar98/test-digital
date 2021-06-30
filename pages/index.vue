@@ -1,7 +1,7 @@
 <template>
   <div class="container p-5">
-    <MainFilter  />
-    <MainTodos v-bind:data="todos" />
+    <MainFilter :onFilter="setFilter" />
+    <MainTodos :data="todos" />
   </div>
 </template>
 
@@ -18,15 +18,22 @@ export default {
   },
 
   methods: {
+    async setFilter(id) {
+      let request = await this.$axios.$get(
+        "https://jsonplaceholder.typicode.com/todos?userId=" + id
+      );
+      this.todos = request;
+    },
+
     async getTodos() {
       let request = await this.$axios.$get(
         "https://jsonplaceholder.typicode.com/todos?_limit=20"
       );
       this.todos = request;
     },
-    showAlert(){
-      alert("AWFAWF")
-    }
+    showAlert() {
+      alert("AWFAWF");
+    },
   },
 };
 </script>

@@ -9,7 +9,7 @@
         <span class="text-white"
           >The task belongs to user with ID : {{ todoInfo.userId }}</span
         >
-        <span class="text-white">Status: {{ todoInfo.completed }}</span>
+        <span class="text-white">Finished status: {{ todoInfo.completed }}</span>
       </div>
     </div>
   </div>

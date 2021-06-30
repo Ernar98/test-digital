@@ -12,6 +12,7 @@
 
 <script>
 export default {
+  props: ["onFilter"],
   data() {
     return {
       picked: 1,
@@ -20,7 +21,7 @@ export default {
   },
   watch: {
     picked: function () {
-      alert(this.picked);
+      this.onFilter(this.picked);
     },
   },
 };
